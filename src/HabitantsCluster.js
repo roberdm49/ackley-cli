@@ -91,47 +91,18 @@ class HabitantsCluster {
     return childrens
   }
 
-  getStatistics() {
-    let statistics = {
-      best: {
-        fitness: BEST_DISCERNIBLE,
-        habitant: {
-          values: [],
-          deviations: []
-        }
-      },
-      average: 0,
-      worst: {
-        fitness: WORST_DISCERNIBLE,
-        habitant: {
-          values: [],
-          deviations: []
-        }
-      }
-    }
-
-    
-
+  getBest() {
+    let best = BEST_DISCERNIBLE
 
     for (const habitant of this.listOfHabitants) {
       const currentFitness = habitant.getFitness()
 
-      if (currentFitness < statistics.best.fitness) {
-        statistics.best.fitness = currentFitness
-        statistics.best.habitant.values = habitant.values
-        statistics.best.habitant.deviations = habitant.deviations
-
+      if (currentFitness < best) {
+        best = currentFitness
       }
-      if (currentFitness > statistics.worst.fitness) {
-        statistics.worst.fitness = currentFitness
-        statistics.worst.habitant.values = habitant.values
-        statistics.worst.habitant.deviations = habitant.deviations
-      }
-      statistics.average += currentFitness
     }
-    statistics.average /= this.listOfHabitants.length
 
-    return statistics
+    return best
   }
 
   getNextGeneration(method) {
@@ -140,14 +111,11 @@ class HabitantsCluster {
       case ELITISM:
         const selectedNextGenerationByElitism = this.selectByElitism(this.listOfHabitants, childrens)
         return selectedNextGenerationByElitism
-
       case TOURNAMENT:
         const selectedNextGenerationByTournament = this.selectByTournament(this.listOfHabitants, childrens)
         return selectedNextGenerationByTournament
-
       default:
-
-        return new HabitantsCluster(69, this.populationSize)
+        return new HabitantsCluster(0, this.populationSize)
     }
   }
 }
