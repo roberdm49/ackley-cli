@@ -92,17 +92,19 @@ class HabitantsCluster {
   }
 
   getBest() {
-    let best = BEST_DISCERNIBLE
+    let bestFitness = BEST_DISCERNIBLE
+    let bestValues = {}
 
     for (const habitant of this.listOfHabitants) {
       const currentFitness = habitant.getFitness()
 
-      if (currentFitness < best) {
-        best = currentFitness
+      if (currentFitness < bestFitness) {
+        bestFitness = currentFitness
+        bestValues = habitant
       }
     }
 
-    return best
+    return `Fitness: ${bestFitness} | Valores: [${bestValues.values}] | Desviaciones: [${bestValues.deviations}]`
   }
 
   getNextGeneration(method) {

@@ -14,7 +14,7 @@ const getUserInputValues = () => {
     selection: 'e',
     tournamentVictories: 5,
     elitismPercentage: 10,
-    iterationsPerRun: 100,
+    iterationsPerRun: 100000,
   };
   
   const values = {};

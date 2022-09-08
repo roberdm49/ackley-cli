@@ -1,3 +1,4 @@
+const fs = require('fs')
 const HabitantsCluster = require('./HabitantsCluster');
 
 class Runner {
@@ -12,18 +13,14 @@ class Runner {
 
   run() {
     const { dimensions, numberOfGenerations, populationSize, method, elitismPercentage, tournamentPercentage } = this
-
     let population = new HabitantsCluster(dimensions, populationSize)
-    let listOfBest = [population.getBest()]
+    const listOfBest = [`Generacion 0 (inicial) => ${population.getBest()}`]
 
     for (let i = 1; i < numberOfGenerations; i++) {
       population = population.getNextGeneration(method)
-      listOfBest.push(population.getBest())
+      listOfBest.push(`Generacion ${i} => ${population.getBest()}`)
     }
-
-    return {
-      best: listOfBest,
-    }
+    return listOfBest;
   }
 }
 
