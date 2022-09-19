@@ -4,7 +4,9 @@ const { validations } = require('./validations')
 const { questions } = require('./questionMessages')
 const { errors } = require('./errorMessages')
 
-const { printTitle, printError } = require('./print')
+const { printTitle, printError } = require('./print');
+
+const { fileLoader } = require('./fileLoader');
 
 const getUserInputValues = () => {
   const INITIAL_STATE = {
@@ -39,7 +41,7 @@ const getUserInputValues = () => {
   }
   */
 
-  const { runs, dimensions, populationSize, selection, tournamentVictories, elitismPercentage, iterationsPerRun } = INITIAL_STATE;
+  const { runs, dimensions, populationSize, selection, tournamentVictories, elitismPercentage, iterationsPerRun } = fileLoader();
 
   return {
     dimensions,
