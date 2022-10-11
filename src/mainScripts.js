@@ -7,6 +7,7 @@ const { errors } = require('./errorMessages')
 const { printTitle, printError } = require('./print');
 
 const { fileLoader } = require('./fileLoader');
+const { commandReader } = require('./commandReader');
 
 const getUserInputValues = () => {
   const INITIAL_STATE = {
@@ -19,8 +20,6 @@ const getUserInputValues = () => {
     iterationsPerRun: 100000,
   };
   
-  const values = {};
-
   /*
   
   for (const field of Object.keys(INITIAL_STATE)) {
@@ -41,15 +40,36 @@ const getUserInputValues = () => {
   }
   */
 
-  const { runs, dimensions, populationSize, selection, tournamentVictories, elitismPercentage, iterationsPerRun } = fileLoader();
+  const HELP_OPTION = '-?';
+  const FILE_OPTION = '--file';
+
+  const HELP_TEXT = `
+      Opciones aceptadas:\n
+      "-r": Cantidad de ejecuciones del algoritmo\n
+      "-d": Cantidad de dimensiones que usara el algoritmo\n
+      "-p": Cantidad de poblacion que usara el algoritmo\n
+      "-s": Metodo de seleccion que usara el algoritmo (Se acepta t|T para torneo y e|E para elitismo)\n
+      "-i": Cantidad de iteraciones por ejecucion que usara el algoritmo\n
+  `; 
+
+  const arguments = process.argv.slice(2);
+  let values; //{ runs, dimensions, populationSize, selection, tournamentVictories, elitismPercentage, iterationsPerRun };
+  
+  if(arguments[0] === FILE_OPTION) {
+    values = fileLoader();
+  } else if (arguments[0] === HELP_OPTION || arguments.length === 0){
+      console.log(HELP_TEXT);    
+  } else {
+    values = commandReader(arguments);
+  }
 
   return {
-    dimensions,
-    numberOfGenerations: iterationsPerRun,
-    populationSize,
-    method: selection === ('t' || 'T') ? 'tournament' : 'elitism',
-    elitismPercentage,
-    tournamentPercentage: tournamentVictories,
+    dimensions: values.dimensions,
+    numberOfGenerations: values.iterationsPerRun,
+    populationSize: values.populationSize,
+    method: values.selection === ('t' || 'T') ? 'tournament' : 'elitism',
+    elitismPercentage: values.elitismPercentage,
+    tournamentPercentage: values.tournamentVictories,
   }
 }
 
