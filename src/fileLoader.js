@@ -56,14 +56,14 @@ function fileLoader() {
             case "SurvivalSelectionBias":
                 if(params.selection === ('t' || 'T')) {
                     if(!validations.tournamentVictories(parseInt(parameterKeyValue[1].trim()))) {
-                        console.log('El valor establecido para la cantidad de poblacion es invalido...');
+                        console.log('El valor establecido para la cantidad de victorias es invalido...');
                         console.log('Se admiten valores positivos enteros entre 1 y 10, por defecto se usara 1...');
                     } else {
                         params.tournamentVictories = parseInt(parameterKeyValue[1].trim());
                     }
                 } else if (params.selection === ('e' || 'E')){
                     if(!validations.elitismPercentage(parseInt(parameterKeyValue[1].trim()))) {
-                        console.log('El valor establecido para la cantidad de poblacion es invalido...');
+                        console.log('El valor establecido para el porcentaje de elitismo es invalido...');
                         console.log('Se admiten valores positivos enteros entre 1 y 100, por defecto se usara 1...');
                     } else {
                         params.elitismPercentage = parseInt(parameterKeyValue[1].trim());
@@ -72,7 +72,7 @@ function fileLoader() {
                 break;
             case "Iterations":
                 if(!validations.iterationsPerRun(parseInt(parameterKeyValue[1].trim()))) {
-                    console.log('El valor establecido para la cantidad de poblacion es invalido...');
+                    console.log('El valor establecido para la cantidad de iteraciones es invalido...');
                     console.log('Se admiten valores positivos enteros entre 1 y 100000, por defecto se usara 1...');
                 } else {
                     params.iterationsPerRun = parseInt(parameterKeyValue[1].trim());

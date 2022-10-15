@@ -1,3 +1,5 @@
+const { validations } = require('./Validations');
+
 let INITIAL_STATE = {
     runs: 1,
     dimensions: 1,
@@ -22,7 +24,7 @@ function commandReader(arguments) {
     let bias;
 
     for (let index = 0; index < arguments.length; index++) {
-        const element = array[index];
+        const element = arguments[index];
         
         if(element.startsWith('-')) {
             prevOption = element;
@@ -67,7 +69,7 @@ function commandReader(arguments) {
                     break;
                 case ITERATIONS_OPTION_SELECTOR:
                     if(!validations.iterationsPerRun(parseInt(element))) {
-                        console.log('El valor establecido para la cantidad de poblacion es invalido...');
+                        console.log('El valor establecido para la cantidad de iteraciones es invalido...');
                         console.log('Se admiten valores positivos enteros entre 1 y 100000, por defecto se usara 1...');
                     } else {
                         INITIAL_STATE.iterationsPerRun = parseInt(element);
@@ -88,12 +90,24 @@ function commandReader(arguments) {
     }
 
     if(bias) {
-        if(INITIAL_STATE.selection.toLowerCase() === 't'){
-            INITIAL_STATE.tournamentVictories = bias;
+        if(INITIAL_STATE.selection.toLowerCase() === 't') {
+            if(!validations.tournamentVictories(parseInt(parameterKeyValue[1].trim()))) {
+                console.log('El valor establecido para la cantidad de victorias es invalido...');
+                console.log('Se admiten valores positivos enteros entre 1 y 10, por defecto se usara 1...');
+            } else {
+                INITIAL_STATE.tournamentVictories = bias;
+            }
         } else {
-            INITIAL_STATE.elitismPercentage = bias;
-        }
+            if(!validations.elitismPercentage(parseInt(parameterKeyValue[1].trim()))) {
+                console.log('El valor establecido para el porcentaje de elitismo es invalido...');
+                console.log('Se admiten valores positivos enteros entre 1 y 100, por defecto se usara 1...');
+            } else {
+                INITIAL_STATE.elitismPercentage = bias;
+            }
+        } 
     }
+
+    return INITIAL_STATE;
 }
 
 module.exports = { commandReader }

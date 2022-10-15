@@ -43,13 +43,13 @@ const getUserInputValues = () => {
   const HELP_OPTION = '-?';
   const FILE_OPTION = '--file';
 
-  const HELP_TEXT = `
-      Opciones aceptadas:\n
-      "-r": Cantidad de ejecuciones del algoritmo\n
-      "-d": Cantidad de dimensiones que usara el algoritmo\n
-      "-p": Cantidad de poblacion que usara el algoritmo\n
-      "-s": Metodo de seleccion que usara el algoritmo (Se acepta t|T para torneo y e|E para elitismo)\n
-      "-i": Cantidad de iteraciones por ejecucion que usara el algoritmo\n
+  const HELP_TEXT = `Opciones aceptadas:
+    "-r": Cantidad de ejecuciones del algoritmo.
+    "-d": Cantidad de dimensiones que usara el algoritmo.
+    "-p": Cantidad de poblacion que usara el algoritmo.
+    "-s": Metodo de seleccion que usara el algoritmo (Se acepta t|T para torneo y e|E para elitismo).
+    "-i": Cantidad de iteraciones por ejecucion que usara el algoritmo.
+    "--file": Establece los parametros del algoritmo desde un archivo.
   `; 
 
   const arguments = process.argv.slice(2);
@@ -58,7 +58,8 @@ const getUserInputValues = () => {
   if(arguments[0] === FILE_OPTION) {
     values = fileLoader();
   } else if (arguments[0] === HELP_OPTION || arguments.length === 0){
-      console.log(HELP_TEXT);    
+      console.log(HELP_TEXT);
+      return null;    
   } else {
     values = commandReader(arguments);
   }
