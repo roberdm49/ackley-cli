@@ -91,14 +91,14 @@ function commandReader(arguments) {
 
     if(bias) {
         if(INITIAL_STATE.selection.toLowerCase() === 't') {
-            if(!validations.tournamentVictories(parseInt(parameterKeyValue[1].trim()))) {
+            if(!validations.tournamentVictories(bias)) {
                 console.log('El valor establecido para la cantidad de victorias es invalido...');
                 console.log('Se admiten valores positivos enteros entre 1 y 10, por defecto se usara 1...');
             } else {
                 INITIAL_STATE.tournamentVictories = bias;
             }
         } else {
-            if(!validations.elitismPercentage(parseInt(parameterKeyValue[1].trim()))) {
+            if(!validations.elitismPercentage(bias)) {
                 console.log('El valor establecido para el porcentaje de elitismo es invalido...');
                 console.log('Se admiten valores positivos enteros entre 1 y 100, por defecto se usara 1...');
             } else {
