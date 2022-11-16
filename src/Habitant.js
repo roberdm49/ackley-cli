@@ -40,8 +40,8 @@ class Habitant {
 
     for (let i = 0; i < this.values.length; i++) {
       const normalizedDeviator = Math.random()
+      let mutatedValue = Math.floor(this.values[i] + this.deviations[i] * normalizedDeviator)
       let mutatedDeviation = this.deviations[i] * (1 + ALPHA * normalizedDeviator)
-      let mutatedValue = Math.floor(this.values[i] + mutatedDeviation * normalizedDeviator)
 
       if (this.deviationIsOutOfLimits(mutatedDeviation)) {
         mutatedDeviation = randomFloatFromInterval(MIN_DEVIATION, MAX_DEVIATION)
