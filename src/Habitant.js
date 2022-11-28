@@ -1,5 +1,5 @@
 const { getAckleyFit } = require('./getAckleyFit');
-const { randomFloatFromInterval } = require('./randomFromInterval');
+const { randomFloatFromInterval, randomFloatTruncatedFromInterval } = require('./randomFromInterval');
 
 const MIN_DEVIATION = 1
 const MAX_DEVIATION = 5
@@ -42,16 +42,13 @@ class Habitant {
       let mutatedValue = Math.floor(this.values[i] + this.deviations[i] * normalizedDeviator)
       let mutatedDeviation = this.deviations[i] * (1 + ALPHA * normalizedDeviator)
 
-      /*
       if (this.deviationIsOutOfLimits(mutatedDeviation)) {
         mutatedDeviation = randomFloatFromInterval(MIN_DEVIATION, MAX_DEVIATION)
       }
 
       if (this.valueIsOutOfLimits(mutatedValue)) {
-        console.log({mutatedValue})
-        mutatedValue = randomFloatFromInterval(this.minValue, this.maxValue)
+        mutatedValue = randomFloatTruncatedFromInterval(this.minValue, this.maxValue)
       }
-      */
 
       values.push(mutatedValue)
       deviations.push(mutatedDeviation)

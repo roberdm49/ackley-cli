@@ -6,6 +6,10 @@ const randomFloatFromInterval = (min, max) => {
   return Math.random() * (max - min + 1) + min
 }
 
+const randomFloatTruncatedFromInterval = (min, max) => {
+  return (Math.random() * (max - min + 1) + min).toFixed(7)
+}
+
 const getMultipleRandomIntFromIntervalWithoutDuplicates = (min, max, quantity) => {
   let numbers = []
 
@@ -20,4 +24,4 @@ const getMultipleRandomIntFromIntervalWithoutDuplicates = (min, max, quantity) =
   return numbers
 }
 
-module.exports = { randomIntFromInterval, randomFloatFromInterval, getMultipleRandomIntFromIntervalWithoutDuplicates };
+module.exports = { randomIntFromInterval, randomFloatFromInterval, getMultipleRandomIntFromIntervalWithoutDuplicates, randomFloatTruncatedFromInterval };
