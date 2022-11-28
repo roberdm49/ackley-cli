@@ -1,12 +1,14 @@
 const fs = require('fs');
 
 function writeHeaders (parameters, path) {
-  const {dimensions, numberOfGenerations, populationSize, method, elitismPercentage, tournamentPercentage} = parameters;
+  const {dimensions, numberOfGenerations, populationSize, method, minValue, maxValue, elitismPercentage, tournamentPercentage} = parameters;
   const text = `
     \rDimensiones: ${dimensions}
     \rNúmero de generaciones: ${numberOfGenerations}
     \rTamaño de la población: ${populationSize}
     \rMétodo de selección de supervivientes: ${method}
+    \rValor mínimo de variable: ${minValue}
+    \rValor máximo de variable: ${maxValue}
     \rValor de metodo de selección: ${method === 'elitism' ? elitismPercentage : tournamentPercentage}
     \rValores de la run:
   `

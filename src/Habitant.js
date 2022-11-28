@@ -1,18 +1,17 @@
 const { getAckleyFit } = require('./getAckleyFit');
 const { randomFloatFromInterval } = require('./randomFromInterval');
 
-const MIN_VALUE = -32768
-const MAX_VALUE = 32768
-
 const MIN_DEVIATION = 1
 const MAX_DEVIATION = 5
 
 class Habitant {
-  constructor(dimension) {
+  constructor({ dimensions, minValue, maxValue }) {
     let values = []
     let deviations = []
-    for (let i = 0; i < dimension; i++) {
-      values.push(randomFloatFromInterval(MIN_VALUE, MAX_VALUE))
+    this.minValue = minValue
+    this.maxValue = maxValue
+    for (let i = 0; i < dimensions; i++) {
+      values.push(randomFloatFromInterval(this.minValue, this.maxValue))
       deviations.push(randomFloatFromInterval(MIN_DEVIATION, MAX_DEVIATION))
     }
 
@@ -30,7 +29,7 @@ class Habitant {
   }
 
   valueIsOutOfLimits(value) {
-    return (value > MAX_VALUE || value < MIN_VALUE)
+    return (value > this.maxValue || value < this.minValue)
   }
 
   getChildren() {
@@ -48,7 +47,7 @@ class Habitant {
       }
 
       if (this.valueIsOutOfLimits(mutatedValue)) {
-        mutatedValue = randomFloatFromInterval(MIN_VALUE, MAX_VALUE)
+        mutatedValue = randomFloatFromInterval(this.minValue, this.maxValue)
       }
 
       values.push(mutatedValue)
@@ -56,7 +55,7 @@ class Habitant {
     }
 
     const dimensionBasedInTheCurrentHabitants = this.values.length
-    return new Habitant(dimensionBasedInTheCurrentHabitants)
+    return new Habitant({ dimensions: dimensionBasedInTheCurrentHabitants, minValue: this.minValue, maxValue: this.maxValue })
   }
 }
 

@@ -4,6 +4,8 @@ let INITIAL_STATE = {
     runs: 1,
     dimensions: 1,
     populationSize: 120,
+    minValue: -3000,
+    maxValue: 3000,
     selection: 'e',
     tournamentVictories: 5,
     elitismPercentage: 10,
@@ -16,6 +18,8 @@ const POPULATION_OPTION_SELECTOR = '-p';
 const SELECTION_METHOD_OPTION_SELECTOR = '-s';
 const SELECTION_BIAS_OPTION_SELECTOR = '-b';
 const ITERATIONS_OPTION_SELECTOR = '-i';
+const MIN_VALUE_SELECTOR = '-minv';
+const MAX_VALUE_SELECTOR = '-maxv';
 
 
 function commandReader(arguments) {
@@ -67,6 +71,20 @@ function commandReader(arguments) {
                 case SELECTION_BIAS_OPTION_SELECTOR:
                     bias = parseInt(element);
                     break;
+                case MIN_VALUE_SELECTOR:
+                    if (!validations.minValue(parseInt(element))) {
+                        console.log('El valor establecido para el valor mínimo es invalido...');
+                        console.log('Se admite valores entre -32768 y 32768, se utilizara por defecto -3000...');
+                    } else {
+                        INITIAL_STATE.minValue = parseInt(element);
+                    }
+                case MAX_VALUE_SELECTOR:
+                    if (!validations.maxValue(parseInt(element))) {
+                        console.log('El valor establecido para el valor máximo es invalido...');
+                        console.log('Se admite valores entre -32768 y 32768, se utilizara por defecto 3000...');
+                    } else {
+                        INITIAL_STATE.maxValue = parseInt(element);
+                    }
                 case ITERATIONS_OPTION_SELECTOR:
                     if(!validations.iterationsPerRun(parseInt(element))) {
                         console.log('El valor establecido para la cantidad de iteraciones es invalido...');

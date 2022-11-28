@@ -15,15 +15,17 @@ const DEFAULT_OPTIONS = {
 }
 
 class HabitantsCluster {
-  constructor(dimension, populationSize, initializedHabitants = []) {
+  constructor({ dimensions, populationSize, initializedHabitants = [], minValue, maxValue }) {
     this.populationSize = populationSize
+    this.minValue = minValue
+    this.maxValue = maxValue
 
     if (initializedHabitants?.length) {
       this.listOfHabitants = initializedHabitants
     } else {
       let listOfHabitants = []
       for (let i = 0; i < populationSize; i++) {
-        listOfHabitants.push(new Habitant(dimension))
+        listOfHabitants.push(new Habitant({ dimensions, minValue, maxValue }))
       }
       this.listOfHabitants = listOfHabitants
     }
@@ -42,7 +44,7 @@ class HabitantsCluster {
     const restOfHabitantsForNextGenerations = shuffle(allHabitants.slice(elitismCeil)).slice(0, elitismRest)
   
     const nextGeneration = [...elitismHabitants, ...restOfHabitantsForNextGenerations]
-    const newCluster = new HabitantsCluster(0, populationSize, nextGeneration) 
+    const newCluster = new HabitantsCluster({ dimensions: 0, populationSize, initializedHabitants: nextGeneration }) 
     return newCluster;
   }
   
@@ -71,12 +73,13 @@ class HabitantsCluster {
     const restOfHabitantsForNextGenerations = shuffle(allHabitantsWithScore.map(elem => elem.habitant).slice(tournamentCeil)).slice(0, tournamentRest)
   
     const nextGeneration = [...habitantsWinnersOfTheTournament, ...restOfHabitantsForNextGenerations]
-    const newCluster = new HabitantsCluster(0, populationSize, nextGeneration) 
+    const newCluster = new HabitantsCluster({ dimensions: 0, populationSize, initializedHabitants: nextGeneration, minValue: this.minValue, maxValue: this.maxValue }) 
     return newCluster;
   }
 
   getHabitants() {
-    return [...this.listOfHabitants]
+    // return [...this.listOfHabitants]
+    return this.listOfHabitants
   }
 
   getPopulationSize() {
@@ -117,7 +120,7 @@ class HabitantsCluster {
         const selectedNextGenerationByTournament = this.selectByTournament(this.listOfHabitants, childrens)
         return selectedNextGenerationByTournament
       default:
-        return new HabitantsCluster(0, this.populationSize)
+        return new HabitantsCluster({ dimensions: 0, populationSize: this.populationSize, minValue: this.minValue, maxValue: this.maxValue })
     }
   }
 }

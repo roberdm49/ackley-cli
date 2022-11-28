@@ -10,35 +10,6 @@ const { fileLoader } = require('./fileLoader');
 const { commandReader } = require('./commandReader');
 
 const getUserInputValues = () => {
-  const INITIAL_STATE = {
-    runs: 1,
-    dimensions: 1,
-    populationSize: 120,
-    selection: 'e',
-    tournamentVictories: 5,
-    elitismPercentage: 10,
-    iterationsPerRun: 100000,
-  };
-  
-  /*
-  
-  for (const field of Object.keys(INITIAL_STATE)) {
-    if (field === 'tournamentVictories' && values.selection === ('e' || 'E')) {
-      // do nothing
-    } else if (field === 'elitismPercentage' && values.selection === ('t' || 'T')) {
-      // do nothing
-    } else {
-      let value = readlineSync.question(questions[field]);
-      value = field === 'selection' ? value : parseInt(value);
-      const validation = validations[field];
-      while (!validation(value)) {
-        printError(errors[field]);
-        value = readlineSync.question(questions[field]);
-      }
-      values[field] = value;
-    }
-  }
-  */
 
   const HELP_OPTION = '-?';
   const FILE_OPTION = '--file';
@@ -47,6 +18,8 @@ const getUserInputValues = () => {
     "-r": Cantidad de ejecuciones del algoritmo.
     "-d": Cantidad de dimensiones que usara el algoritmo.
     "-p": Cantidad de poblacion que usara el algoritmo.
+    "-minv": Valor minimo de variable
+    "-maxv": Valor maximo de variable
     "-s": Metodo de seleccion que usara el algoritmo (Se acepta t|T para torneo y e|E para elitismo).
     "-b": Sesgo de seleccion aplicado al metodo de seleccion
     "-i": Cantidad de iteraciones por ejecucion que usara el algoritmo.
@@ -69,6 +42,8 @@ const getUserInputValues = () => {
     dimensions: values.dimensions,
     numberOfGenerations: values.iterationsPerRun,
     populationSize: values.populationSize,
+    minValue: values.minValue,
+    maxValue: values.maxValue,
     method: values.selection === ('t' || 'T') ? 'tournament' : 'elitism',
     elitismPercentage: values.elitismPercentage,
     tournamentPercentage: values.tournamentVictories,
