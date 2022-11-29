@@ -18,7 +18,7 @@ const getUserInputValues = () => {
     "-r": Cantidad de ejecuciones del algoritmo.
     "-d": Cantidad de dimensiones que usara el algoritmo.
     "-p": Cantidad de poblacion que usara el algoritmo.
-    "-minv": Valor minimo de variable
+    "-minv": Valor minimo de variable (se tomara el valor negativo del numero escrito luego de esta opcion)
     "-maxv": Valor maximo de variable
     "-s": Metodo de seleccion que usara el algoritmo (Se acepta t|T para torneo y e|E para elitismo).
     "-b": Sesgo de seleccion aplicado al metodo de seleccion

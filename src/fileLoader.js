@@ -13,6 +13,8 @@ function fileLoader() {
         dimensions: 1,
         populationSize: 10,
         selection: 'e',
+        minValue: -32768,
+        maxValue: 32768,
         tournamentVictories: 1,
         elitismPercentage: 1,
         iterationsPerRun: 1,
@@ -69,6 +71,22 @@ function fileLoader() {
                         params.elitismPercentage = parseInt(parameterKeyValue[1].trim());
                     }
                 } 
+                break;
+            case "minValue":
+                if (!validations.minValue(parseInt(parameterKeyValue[1].trim()))) {
+                    console.log('El valor establecido para el valor mínimo es invalido...');
+                    console.log('Se admite valores entre -32768 y 32768, se utilizara por defecto -3000...');
+                } else {
+                    params.minValue = parseInt(parameterKeyValue[1].trim());
+                }
+                break;
+            case "maxValue":
+                if (!validations.maxValue(parseInt(parameterKeyValue[1].trim()))) {
+                    console.log('El valor establecido para el valor máximo es invalido...');
+                    console.log('Se admite valores entre -32768 y 32768, se utilizara por defecto 3000...');
+                } else {
+                    params.maxValue = parseInt(parameterKeyValue[1].trim());
+                }
                 break;
             case "Iterations":
                 if(!validations.iterationsPerRun(parseInt(parameterKeyValue[1].trim()))) {

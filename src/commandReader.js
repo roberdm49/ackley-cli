@@ -30,7 +30,7 @@ function commandReader(arguments) {
     for (let index = 0; index < arguments.length; index++) {
         const element = arguments[index];
         
-        if(element.startsWith('-')) {
+        if(element.startsWith('-') && (prevOption !== MAX_VALUE_SELECTOR || prevOption !== MIN_VALUE_SELECTOR)) {
             prevOption = element;
         } else {
             let unknownParameter = false;
@@ -78,6 +78,7 @@ function commandReader(arguments) {
                     } else {
                         INITIAL_STATE.minValue = parseInt(element);
                     }
+                    break;
                 case MAX_VALUE_SELECTOR:
                     if (!validations.maxValue(parseInt(element))) {
                         console.log('El valor establecido para el valor máximo es invalido...');
@@ -85,6 +86,7 @@ function commandReader(arguments) {
                     } else {
                         INITIAL_STATE.maxValue = parseInt(element);
                     }
+                    break;
                 case ITERATIONS_OPTION_SELECTOR:
                     if(!validations.iterationsPerRun(parseInt(element))) {
                         console.log('El valor establecido para la cantidad de iteraciones es invalido...');
