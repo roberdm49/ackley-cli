@@ -39,6 +39,7 @@ const getUserInputValues = () => {
   }
 
   return {
+    runs: values.runs,
     dimensions: values.dimensions,
     numberOfGenerations: values.iterationsPerRun,
     populationSize: values.populationSize,

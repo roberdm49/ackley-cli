@@ -8,16 +8,25 @@ const start = new Date()
 const values = getUserInputValues();
 
 if(values){
-  const runner = new Runner(values);
-  const result = runner.run();
-  const end = new Date()
-  
-  fs.writeFileSync('res.txt', '');
-  writeTitleAndTime(end - start, 'res.txt');
-  writeHeaders(values, 'res.txt');
-  fs.appendFile('res.txt', JSON.stringify(result, null, 2), function () {
-    console.log('Run cargada')
-  });
-  
-  console.log(values)
+  const { runs } = values
+  const runBaseFileName = new Date().toLocaleString()
+    .replaceAll('/', '-')
+    .replaceAll(':', '_')
+
+  for (let i = 0; i < runs; i++) {
+    const runner = new Runner(values);
+    const result = runner.run();
+    const end = new Date()
+    
+    const filename = runs === 1
+      ? `Run, ${runBaseFileName}.txt`
+      : `Run_${i}, ${runBaseFileName}.txt`
+    
+    fs.writeFileSync(filename, '');
+    writeTitleAndTime(end - start, filename);
+    writeHeaders(values, filename);
+    fs.appendFile(filename, JSON.stringify(result, null, 2), function () {
+      console.log('Run cargada')
+    });
+  }
 }
