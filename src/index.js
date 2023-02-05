@@ -20,7 +20,7 @@ if(values){
     
     const filename = runs === 1
       ? `Run, ${runBaseFileName}.txt`
-      : `Run_${i}, ${runBaseFileName}.txt`
+      : `Run_${i + 1}, ${runBaseFileName}.txt`
     
     fs.writeFileSync(filename, '');
     writeTitleAndTime(end - start, filename);
