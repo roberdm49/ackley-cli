@@ -1,4 +1,5 @@
-const errors = {
+const errorMessages = {
+  fileOption: 'Opcion no valida. Pruebe con M/m o A/a',
   runs: 'El valor debe ser un numero entero, entre 1 y 5 ',
   dimensions: 'El valor debe ser un numero entero, entre 1 y 50 ',
   populationSize: 'El valor debe ser un numero entero, entre 10 y 100000 ',
@@ -8,4 +9,4 @@ const errors = {
   iterationsPerRun: 'El valor debe ser un numero entero entre 1 y 1000000 ',
 };
 
-module.exports = { errors }
+module.exports = { errorMessages }

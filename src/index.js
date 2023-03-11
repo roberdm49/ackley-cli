@@ -1,17 +1,15 @@
 const fs = require('fs');
-const { printTitle, getUserInputValues } = require('./mainScripts');
+const { getUserInputs } = require('./userInputs')
 const { writeHeaders, writeTitleAndTime } = require('./writer')
+const { getFormattedDate } = require('./utilities')
 const Runner = require('./Runner')
 
-printTitle('Bienvenido/a al algoritmo evolutivo - Ackley');
 const start = new Date()
-const values = getUserInputValues();
+const values = getUserInputs()
 
 if(values){
   const { runs } = values
-  const runBaseFileName = new Date().toLocaleString()
-    .replaceAll('/', '-')
-    .replaceAll(':', '_')
+  const runBaseFileName = getFormattedDate(new Date())
 
   for (let i = 0; i < runs; i++) {
     const runner = new Runner(values);
