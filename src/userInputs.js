@@ -2,7 +2,8 @@ const readlineSync = require('readline-sync');
 const { questions } = require('./questionMessages')
 const { errorMessages } = require('./errorMessages')
 const { validations } = require('./validations')
-const { printTitle, printError } = require('./print')
+const { printTitle, printError } = require('./print');
+const { fileLoader } = require('./fileLoader');
 
 const inputsInOrder = [
   'runs',
@@ -32,7 +33,7 @@ const getUserInputs = () => {
 
   if (userFileAnswer === 'a' || userFileAnswer === 'A') {
     const userPathFile = readlineSync.question('Ingrese el path para el archivo de configuracion \n')
-    return // algoritmo de kun para tomar los datos del file
+    return fileLoader(userPathFile)
   }
 
   for (const field of inputsInOrder) {
@@ -45,6 +46,8 @@ const getUserInputs = () => {
       }
     }
   }
+
+  return answers
 }
 
 module.exports = { getUserInputs }
