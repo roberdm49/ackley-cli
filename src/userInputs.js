@@ -56,7 +56,7 @@ const getUserInputs = () => {
       while(!validations[field](answers[field])) {
         const userAnswer = readlineSync.question(questions[field])
         if (validations[field](userAnswer)) {
-          answers[field] = field === 'minValue' ? `${userAnswer}` : userAnswer
+          answers[field] = userAnswer
         } else {
           printError(errorMessages[field])
         }
@@ -69,7 +69,7 @@ const getUserInputs = () => {
     dimensions: answers.dimensions,
     numberOfGenerations: answers.iterationsPerRun,
     populationSize: answers.populationSize,
-    minValue: answers.minValue,
+    minValue: parseInt(- answers.minValue),
     maxValue: answers.maxValue,
     method: answers.selection === ('t' || 'T') ? 'tournament' : 'elitism',
     elitismPercentage: answers.elitismPercentage,
