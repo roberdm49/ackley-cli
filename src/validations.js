@@ -7,15 +7,15 @@ const isNotNullOrUndefined = (input) => input !== null && input !== undefined
 
 const validations = {
   fileOption: (input) => isNotNullOrUndefined(input) && isFileInputChar(input),
-  runs: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 1, 5),
-  dimensions: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 1, 50),
-  populationSize: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 10, 100000),
-  minValue: (input) => isNotNullOrUndefined(input) && isNumber(input) && matchMinMax(input, 1, 32768),
-  maxValue: (input) => isNotNullOrUndefined(input) && isNumber(input) && matchMinMax(input, 1, 32768),
+  runs: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 5),
+  dimensions: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 50),
+  populationSize: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 10, 100000),
+  minValue: (input) => isNotNullOrUndefined(input) && isNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 32768),
+  maxValue: (input) => isNotNullOrUndefined(input) && isNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 32768),
   selection: (input) => isNotNullOrUndefined(input) && selectionIsAValidOne(input),
-  tournamentVictories: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 1, 10),
-  elitismPercentage: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 1, 100),
-  iterationsPerRun: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(input) && matchMinMax(input, 1, 1000000),
+  tournamentVictories: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 10),
+  elitismPercentage: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 100),
+  iterationsPerRun: (input) => isNotNullOrUndefined(input) && isAPositiveNumber(parseInt(input)) && matchMinMax(parseInt(input), 1, 1000000),
 }
 
 module.exports = { validations }
