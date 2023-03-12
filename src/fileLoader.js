@@ -7,7 +7,7 @@ function fileLoader(path) {
     try {
         allFileContents = fs.readFileSync(path, 'utf-8');
     } catch {
-        console.log('Por favor intente nuevamente con un path valido.')
+        throw new Error('Por favor intente nuevamente con un path valido.')
     }
 
     let params = {
@@ -103,7 +103,17 @@ function fileLoader(path) {
         }
     });
 
-    return params;
+    return {
+        runs: params.runs,
+        dimensions: params.dimensions,
+        numberOfGenerations: params.iterationsPerRun,
+        populationSize: params.populationSize,
+        minValue: params.minValue,
+        maxValue: params.maxValue,
+        method: params.selection === ('t' || 'T') ? 'tournament' : 'elitism',
+        elitismPercentage: params.elitismPercentage,
+        tournamentPercentage: params.tournamentVictories,
+      }
 
 }
 

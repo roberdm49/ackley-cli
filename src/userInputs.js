@@ -6,7 +6,6 @@ const { printTitle, printError } = require('./print');
 const { fileLoader } = require('./fileLoader');
 
 const inputsInOrder = Object.keys(questions).filter(option => option !== 'fileOption')
-console.log({inputsInOrder})
 
 const getUserInputs = () => {
   const answers = {}
