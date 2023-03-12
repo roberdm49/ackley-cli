@@ -7,6 +7,8 @@ const Runner = require('./Runner')
 const start = new Date()
 const values = getUserInputs()
 
+console.log({values})
+
 if(values){
   const { runs } = values
   const runBaseFileName = getFormattedDate(new Date())
