@@ -4,8 +4,8 @@ const { writeHeaders, writeTitleAndTime } = require('./writer')
 const { getFormattedDate } = require('./utilities')
 const Runner = require('./Runner')
 
-const start = new Date()
 const values = getUserInputs()
+const start = new Date()
 
 if(values){
   const { runs } = values
