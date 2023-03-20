@@ -10,7 +10,6 @@ function writeHeaders (parameters, path) {
     \rValor mínimo de variable: ${minValue}
     \rValor máximo de variable: ${maxValue}
     \rValor de metodo de selección: ${method === 'elitism' ? elitismPercentage : tournamentPercentage}
-    \rValores de la run:
   `
 
   fs.appendFileSync(path, text)
@@ -20,4 +19,14 @@ function writeTitleAndTime (time, path) {
   fs.appendFileSync(path, `Run ejecutada en ${time/1000}s\n`);
 }
 
-module.exports = { writeHeaders, writeTitleAndTime }
+function writeBestCandidate (candidate, generation, path) {
+  fs.appendFileSync(path, `Mejor candidato (generacion  #${generation}) : ${JSON.stringify(candidate)}\n`);
+}
+
+function writeTitleForValues (path) {
+  fs.appendFileSync(path, `\rValores de la run:\n`);
+  
+
+}
+
+module.exports = { writeHeaders, writeTitleAndTime, writeBestCandidate, writeTitleForValues }

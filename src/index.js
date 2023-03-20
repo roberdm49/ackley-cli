@@ -1,11 +1,10 @@
 const fs = require('fs');
 const { getUserInputs } = require('./userInputs')
-const { writeHeaders, writeTitleAndTime } = require('./writer')
+const { writeHeaders, writeTitleAndTime, writeBestCandidate, writeTitleForValues } = require('./writer')
 const { getFormattedDate } = require('./utilities')
 const Runner = require('./Runner')
 
 const values = getUserInputs()
-const start = new Date()
 
 if(values){
   const { runs } = values
@@ -13,7 +12,9 @@ if(values){
 
   for (let i = 0; i < runs; i++) {
     const runner = new Runner(values);
+    const start = new Date()
     const result = runner.run();
+    const { iterations, best, generationOfBest } = result
     const end = new Date()
     
     const filename = runs === 1
@@ -23,7 +24,9 @@ if(values){
     fs.writeFileSync(filename, '');
     writeTitleAndTime(end - start, filename);
     writeHeaders(values, filename);
-    fs.appendFile(filename, JSON.stringify(result, null, 2), function () {
+    writeBestCandidate(best, generationOfBest, filename)
+    writeTitleForValues(filename)
+    fs.appendFile(filename, JSON.stringify(iterations, null, 2), function () {
       console.log('Run cargada')
     });
   }

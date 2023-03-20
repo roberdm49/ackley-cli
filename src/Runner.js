@@ -14,15 +14,28 @@ class Runner {
   }
 
   run() {
-    const { dimensions, numberOfGenerations, populationSize, method, minValue, maxValue, elitismPercentage, tournamentPercentage } = this
+    const { dimensions, numberOfGenerations, populationSize, method, minValue, maxValue } = this
     let population = new HabitantsCluster({ dimensions, populationSize, minValue, maxValue })
-    const listOfBest = [`Generacion 0 (inicial) => ${population.getBest()}`]
+    let iterationBestCandidate = population.getBest()
+    let generationOfBest = null
+    let runBestCandidate = iterationBestCandidate
+    const listOfBest = [`Generacion 0 (inicial) => ${iterationBestCandidate}`]
 
     for (let i = 1; i < numberOfGenerations; i++) {
       population = population.getNextGeneration(method)
-      listOfBest.push(`Generacion ${i} => ${population.getBest()}`)
+      iterationBestCandidate = population.getBest()
+      listOfBest.push(`Generacion ${i} => ${population.getBest().text}`)
+
+      if (iterationBestCandidate.fitness <= runBestCandidate.fitness) {
+        runBestCandidate = iterationBestCandidate
+        generationOfBest = i
+      }
     }
-    return listOfBest;
+    return {
+      iterations: listOfBest,
+      best: runBestCandidate.text,
+      generationOfBest
+    };
   }
 }
 

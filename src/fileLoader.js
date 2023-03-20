@@ -1,13 +1,15 @@
 const fs = require('fs');
+const path = require('path');
 const { validations } = require('./Validations');
 
-function fileLoader(path) {
+function fileLoader(inputPath) {
+    const dirPath = path.join(__dirname, inputPath);
     let allFileContents = ''
 
     try {
-        allFileContents = fs.readFileSync(path, 'utf-8');
-    } catch {
-        throw new Error('Por favor intente nuevamente con un path valido.')
+        allFileContents = fs.readFileSync(dirPath, 'utf-8');
+    } catch (error) {
+        console.log(error)
     }
 
     let params = {

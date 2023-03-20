@@ -107,7 +107,10 @@ class HabitantsCluster {
       }
     }
 
-    return `Fitness: ${bestFitness} | Valores: [${bestValues.values}] | Desviaciones: [${bestValues.deviations}]`
+    return {
+      text: `Fitness: ${bestFitness} | Valores: [${bestValues.values}] | Desviaciones: [${bestValues.deviations}]`,
+      fitness: bestFitness
+    }
   }
 
   getNextGeneration(method) {
