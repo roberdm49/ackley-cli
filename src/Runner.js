@@ -26,7 +26,7 @@ class Runner {
       iterationBestCandidate = population.getBest()
       listOfBest.push(`Generacion ${i} => ${population.getBest().text}`)
 
-      if (iterationBestCandidate.fitness <= runBestCandidate.fitness) {
+      if (iterationBestCandidate.fitness < runBestCandidate.fitness) {
         runBestCandidate = iterationBestCandidate
         generationOfBest = i
       }
