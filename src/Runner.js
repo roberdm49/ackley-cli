@@ -19,12 +19,12 @@ class Runner {
     let iterationBestCandidate = population.getBest()
     let generationOfBest = null
     let runBestCandidate = iterationBestCandidate
-    const listOfBest = [`Generacion 0 (inicial) => ${iterationBestCandidate}`]
+    const listOfBest = [`Generacion 0 (inicial) => ${iterationBestCandidate.text}`]
 
     for (let i = 1; i < numberOfGenerations; i++) {
       population = population.getNextGeneration(method)
       iterationBestCandidate = population.getBest()
-      listOfBest.push(`Generacion ${i} => ${population.getBest().text}`)
+      listOfBest.push(`Generacion ${i} => ${iterationBestCandidate.text}`)
 
       if (iterationBestCandidate.fitness < runBestCandidate.fitness) {
         runBestCandidate = iterationBestCandidate
